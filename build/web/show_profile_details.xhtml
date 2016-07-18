@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+
+            <title>Compose Message</title>
+
+
+        </ui:define>
+
+        <ui:define name="body" >
+
+
+            <h:form>
+                <div class="block">
+                    
+                    <h2 class="text text-primary">#{account.profile.name }</h2>
+
+                    <label class="text">
+                        Account Id :
+                    </label>
+
+                    <span class="text text-info">#{account.profile.id}</span>
+
+                    <br/>
+
+                    <label class="text">
+                        Name :
+                    </label>
+
+                    <span class="text text-info">#{account.profile.name}</span>
+
+                    <br/>
+
+
+                    <label class="text">
+                        Company:
+                    </label>
+
+                    <span class="text text-info">#{account.profile.company}</span>
+
+                    <br/>
+
+                    <label class="text">
+                        Type :
+                    </label>
+
+                    <span class="text text-info">#{account.profile.type}</span>
+
+                    <br/>
+
+                    <label class="text">
+                        Email :
+                    </label>
+
+                    <span class="text text-info">#{account.profile.email}</span>
+
+                    <br/>
+                    <!-- <h:commandButton id="sendMessage"
+                                      value="Send Message"
+                                      action="typeMesssage.xhtml"/> -->
+                    <h:commandButton 
+
+                        class="btn btn-info-outline"
+                        id="send" action="typeMessage.xhtml" value="Send Message"></h:commandButton>
+
+                    <h:commandButton
+
+                        class="btn btn-info-outline"
+                        id="checkMessages" action="checkMessage.xhtml" value="Check Message"></h:commandButton>
+
+
+                </div>
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+

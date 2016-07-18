@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+
+
+
+        </ui:define>
+
+        <ui:define name="body" >
+
+
+            <style>
+                .custom-info{
+                    margin:2em;
+                }
+                .block{
+                    max-width:100%;
+                }
+            </style>
+            <center >
+
+
+
+                <h:form class="main">
+                    <div class="block">
+
+                        <label>Please enter your ID:</label>
+
+                        <h:inputText id="id" required ="true" 
+                                     class="form-control"
+                                     requiredMessage="This field cannot be empty"
+                                     title="Please enter your password"
+                                     value="#{account.accountid}">
+
+                        </h:inputText>
+
+                        <h:commandButton id="submit" value="Submit" class="btn btn-info-outline"
+                                         action="#{account.forgotpwd()}"  />
+
+
+
+
+
+
+                    </div>
+
+
+                </h:form>
+
+            </center>
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+
+            <title>Check Message</title>
+
+
+        </ui:define>
+
+        <ui:define name="body" >
+
+
+
+            <h:form>
+
+                <div class="block">
+
+                    <label>
+                        Please enter ID:
+                    </label>
+                    <h:inputText id="accountid" required ="true" class="form-control"
+                                 requiredMessage="The accountid field cannot be empty"
+                                 title="Please enter your  ID"
+                                 value="#{account.accountid}"
+                                 validatorMessage=" ID should be between 3-10 characters">
+
+                    </h:inputText>
+
+                    <label>
+                        Please enter your  Name:
+                    </label>
+                    <h:inputText id="name" required ="true"  class="form-control"
+                                 requiredMessage="The  name cannot be empty"
+                                 title="Please enter your First Name"
+                                 value="#{account.name}"
+                                 validatorMessage="">
+
+                    </h:inputText>
+
+
+
+
+
+                    <label>
+                        Please enter your selected password:
+                    </label>
+
+                    <h:inputText id="password" required ="true"  class="form-control"
+                                 requiredMessage="The password field cannot be empty"
+                                 title="Please enter your password"
+                                 value="#{account.password}"
+                                 validatorMessage="The length of your 
+                                 password must be between 3 and 20.">
+
+                    </h:inputText>
+
+
+                    <label>
+                        Please enter company
+                    </label>
+
+                    <h:inputText id="company" required ="true" class="form-control" 
+                                 requiredMessage="company name"
+                                 title="Please enter your password"
+                                 value="#{account.company}"
+                                 validatorMessage="company name cannot be empty">
+
+                    </h:inputText>
+
+
+
+
+                    <label>
+                        Please enter account type
+                    </label>
+                    <h:inputText id="type" required ="true"  class="form-control"
+                                 requiredMessage="Account type recruiter or regular"
+                                 title="Please enter your password"
+                                 value="#{account.type}"
+                                 validatorMessage="The length of your 
+                                 password must be between 3 and 20.">
+                        <f:validateLength maximum="20" minimum="3" />
+                    </h:inputText>
+
+
+
+                    <label>
+                        Please enter email address type
+                    </label>
+
+                    <h:inputText id="email" required ="true"  class="form-control"
+                                 requiredMessage="email address"
+                                 title="Please enter your password"
+                                 value="#{account.email}"
+                                 validatorMessage="The length of your 
+                                 password must be between 3 and 20.">
+                        <f:validateLength maximum="20" minimum="3" />
+                    </h:inputText>
+
+
+
+                    <h:commandButton id="submit" value="Submit"  class="form-control btn btn-info-outline"
+                                     action="confirmation2.xhtml" />
+
+
+                </div>
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+
+

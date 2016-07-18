@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Linked UHCL </title>
+        <ui:insert name="head"></ui:insert>
+
+        <!-- http://v4-alpha.getbootstrap.com/getting-started/introduction/ -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+
+        <!-- https://developers.google.com/speed/libraries/#jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+
+        <!-- https://github.com/daneden/animate.css -->
+        <link rel="stylesheet" href="js/import/animate.css-master/animate.min.css"/>
+
+        <script>
+            angular.module('AngularInstance', ['angularVideoBg']);
+        </script>
+
+        <!-- http://plnkr.co/edit/PR2oFbCeDoN3PCwAHMdg?p=preview -->
+        <!-- https://github.com/kanzelm3/angular-video-bg -->
+        <script data-require="angular-video-bg@0.2.3" data-semver="0.2.3" src="https://rawgit.com/kanzelm3/angular-video-bg/master/angular-video-bg.min.js"></script>
+
+        <script>
+            angular.module('AngularInstance').factory('caHelper', function ($timeout, $rootScope) {
+
+
+                var helper = {};
+                helper.console = window.console;
+                helper.alert = window.alert;
+                helper.copy = function (data) {
+                    return $.extend({}, data);
+                }
+
+                return helper;
+
+            });
+
+
+
+        </script>
+
+        <script src="Application/Directives/customDirectives.js"></script>
+
+        <style>
+            .main{
+                max-width:20em;
+            }
+
+            html,body,form{
+                height:100%;
+            }
+            html{
+                font-size:24px;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            body{
+
+                background:gainsboro;
+            }
+            /*
+            form{
+                background:white;
+                padding:2em;
+                border-radius:1em;
+                overflow-y:auto;
+            }*/
+            .btn{
+                margin-top:2em;
+                margin-right:1em;
+            }
+            table{
+                margin:1em;
+            }
+            td,th{
+                padding:1em;
+            }
+            label{
+                margin-top:.5em;
+            }
+
+            /*
+            @-webkit-keyframes greenPulse {
+                from { -webkit-box-shadow: 0 0 2em #333; }
+                50% {  -webkit-box-shadow: 0 0 4em grey; }
+                to { -webkit-box-shadow: 0 0 2em #333; }
+            }
+            .block{
+                -webkit-animation-name: greenPulse;
+                -webkit-animation-duration: 2s;
+                -webkit-animation-iteration-count: infinite;
+            }
+            */
+
+            .block{
+                background: rgba(255, 255, 255, 0.64);
+                padding: 1em;
+                padding-top: 1.5em;
+                border-radius: 1em;
+                color: #00546D;
+                -webkit-box-shadow: -1px -5px 32px -4px rgba(0,0,0,0.98);
+                -moz-box-shadow: -1px -5px 32px -4px rgba(0,0,0,0.98);
+                box-shadow: -1px -5px 32px -4px rgba(255, 255, 255, 0.98);
+            }
+            .card{
+                margin:1em;
+                width:10em;
+                display: inline-block;
+                
+                
+                background-color: #E4FFE2;
+                
+            }
+            input.form-control{
+                width:90%;
+                margin:5%;
+            }
+            
+            .card-title {
+                text-align: center;
+            }
+            form
+            {
+                min-height:100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+            .card-block{
+                text-align:center;
+            }
+            h2{
+                text-align:center;
+            }
+            input[type=checkbox]
+            {
+              /* Double-sized Checkboxes */
+              -ms-transform: scale(2); /* IE */
+              -moz-transform: scale(2); /* FF */
+              -webkit-transform: scale(2); /* Safari and Chrome */
+              -o-transform: scale(2); /* Opera */
+              padding: 10px;
+            }
+            .fix-top{
+                position: fixed;
+                top: 0;
+                left: 0;
+                margin: 0.3em;
+                font-size: 1.5em;
+            }
+        </style>
+        
+        <script>
+        $(document).ready(function(){
+            
+            $('.card').on('mouseleave' , function( event ){
+                var e = $( this ) ;
+                e.removeClass('zoomInDown');
+                e.removeClass('swing');
+                setTimeout( function(){ e.addClass('swing'); }, 10 );
+                 
+            });
+        });
+        
+        </script>
+        
+        
+        <style>
+            .wrapper {
+  margin: 50px auto;
+  width: 280px;
+  height: 370px;
+  background: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 8px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 90;
+}
+
+.ribbon-wrapper-green {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+
+.ribbon-green {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #BFDC7A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); 
+  color: #6a6340;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon-green:before, .ribbon-green:after {
+  content: "";
+  border-top:   3px solid #6e8900;   
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-green:before {
+  left: 0;
+}
+.ribbon-green:after {
+  right: 0;
+}​
+            </style>
+        
+    </h:head>
+    <body ng-app="AngularInstance">
+       <div class="ribbon-wrapper-green">
+           <div onclick="location.href='home.xhtml'" class="ribbon-green">
+               HOME
+           </div>
+               
+       </div>
+        <ui:insert name="body"></ui:insert>
+    </body>
+</html>
+

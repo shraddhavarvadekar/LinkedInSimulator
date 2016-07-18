@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+
+            <title>Post A Job</title>
+
+
+        </ui:define>
+
+        <ui:define name="body" >
+
+            <style>
+                .block{
+                    max-width:100%;
+                }
+            </style>
+
+            <h:form id = "addJob">
+
+
+                <div class="block">
+                    <label>Please enter the Job Title</label>
+                    <h:inputText id ="jobTitle"
+                                 class="form-control"
+                                 required ="true"
+                                 requiredMessage="Please enter a valid Student ID"
+                                 title ="Enter your UHCL Student ID"
+                                 value="#{account.jobTitle}"/>
+
+
+
+
+                    <label>Please enter the Job Description</label>
+                    <h:inputText id ="jobDesc"
+                                 class="form-control"
+                                 required ="true"
+                                 requiredMessage="Please enter a valid Student ID"
+                                 title ="Enter your UHCL Student ID"
+                                 value="#{account.jobDesc}"/>
+
+
+
+                    <label>Please enter the Company Name</label>
+
+
+                    <h:inputText id ="jobCompany"
+                                 class="form-control"
+                                 required ="true"
+                                 requiredMessage="Please enter a valid Student ID"
+                                 title ="Enter your UHCL Student ID"
+                                 value="#{account.jobCompany}"/>
+
+
+
+                    <label>Do you want to Share this job with your Connections</label>
+
+
+                    <h:inputText id ="shareStatus"
+                                 class="form-control"
+                                 required ="true"
+                                 requiredMessage="Please enter a valid Student ID"
+                                 title ="Enter your UHCL Student ID"
+                                 value="#{account.shareStatus}"/>
+
+
+                    <h:commandButton id="addJob"  class="btn btn-info-outline" 
+                                     value="Post Job" 
+                                     action="#{account.addJob(account.accountid)}"></h:commandButton>
+
+
+
+
+                    <a  class="btn btn-info-outline" 
+                                     href="home.xhtml">Home</a>
+
+
+
+                </div>
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+
+
+

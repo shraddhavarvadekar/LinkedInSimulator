@@ -1,0 +1,449 @@
+<div class="team-get-user"> 
+
+-- '%1$s' @userId
+
+select * from account
+	
+</div>
+
+<div class="team-get-1st-recommendation"> 
+
+-- '%1$s' @company
+-- '%2$s' @id
+
+select * from account where company = '%1$s' 
+and id != '%2$s'
+and id not in 
+    (
+        select id1 from connection where id2 = '%2$s'
+        union
+        select id2 from connection where id1 = '%2$s'
+        union
+        select rid from request where sid = '%2$s'
+        union
+        select sid from request where rid = '%2$s'
+    )
+	
+	
+</div>
+
+<div class="team-get-2nd-recommendation"> 
+
+-- '%1$s' @company
+-- '%2$s' @id
+
+
+select * from account where company != '%1$s' 
+and id != '%2$s'
+and id not in 
+    (
+        select id1 from connection where id2 = '%2$s'
+        union
+        select id2 from connection where id1 = '%2$s'
+        union
+        select rid from request where sid = '%2$s'
+        union
+        select sid from request where rid = '%2$s'
+    )
+	
+	
+</div>
+
+<div class="register-user"> 
+
+-- update
+-- '%1$s' @userId
+-- '%2$s' @userPassword
+insert into linkuhcl_user ( userId , userPassword )
+select '%1$s' , '%2$s' from dual
+	where not exists 
+	( 
+		select * from linkuhcl_user
+		where userId = '%1$s'
+	)
+	limit 1
+	
+</div>
+
+<div class="get-all-user"> 
+
+select * from linkuhcl_user 
+
+</div>
+
+<div class="register-user-info"> 
+
+-- update
+-- '%1$s' @userInfoFirstName
+-- '%2$s' @userInfoLastName
+-- '%3$s' @userId
+
+insert into linkuhcl_userInfo 
+(  userInfoFirstName, userInfoLastName , userId , userInfoRole )
+values( '%1$s' , '%2$s' , '%3$s' , 2 )
+	
+</div>
+	
+<div class="get-user"> 
+
+-- '%1$s' @userId
+-- '%2$s' @userPassword
+select * from linkuhcl_user where userId = '%1$s'
+and userPassword = '%2$s'
+	
+</div>
+
+<div class="get-all-user"> 
+
+select * from linkuhcl_user
+	
+</div>
+
+<div class="feed-toggle-user-role"> 
+
+-- update
+
+-- '%1$s' @userId
+-- %2$s @userRole
+
+update linkuhcl_userInfo set userInfoRole = %2$s where userId = '%1$s' 
+	
+</div>
+
+<div class="feed-share-job">
+
+-- update
+-- '%1$s' @jobId
+-- '%2$s' @userId
+
+
+
+insert into linkuhcl_jobShare ( jobShareId ,   jobId , userId )
+values( LEFT(UUID(), 15) , '%1$s' , '%2$s' )
+
+
+</div>
+
+<div class="feed-add-friend">
+
+-- update
+-- '%1$s' @connectUserSender
+-- '%2$s' @connectUserReceiver
+
+insert into linkuhcl_connectUser 
+( connectUserId , connectUserSender , connectUserReceiver , connectUserApproved )
+select LEFT(UUID(), 15) , '%1$s' , '%2$s' , false from dual
+	where not exists 
+	( 
+		select * from linkuhcl_connectUser
+		where connectUserSender = '%1$s' and connectUserReceiver = '%2$s'
+	)
+	limit 1
+
+</div>
+
+<div class="feed-unfriend">
+
+-- update
+-- '%1$s' @connectUserSender
+-- '%2$s' @connectUserReceiver
+
+delete from linkuhcl_connectUser 
+where ( connectUserSender = '%1$s' and connectUserReceiver = '%2$s' )
+or ( connectUserSender = '%2$s' and connectUserReceiver = '%1$s' )
+
+</div>
+
+
+<div class="feed-check-frienship">
+
+-- update
+-- '%1$s' @connectUserSender
+-- '%2$s' @connectUserReceiver
+
+select * from linkuhcl_connectUser 
+where ( connectUserSender = '%1$s' and connectUserReceiver = '%2$s' )
+or ( connectUserSender = '%2$s' and connectUserReceiver = '%1$s' )
+
+</div>
+
+
+<div class="feed-create-job">
+
+-- update
+-- '%1$s' @userId
+-- '%2$s' @jobName
+-- '%3$s' @jobInfo
+
+insert into linkuhcl_job (  userId , jobId , jobName , jobInfo )
+values( '%1$s'  ,  LEFT(UUID(), 15) , '%2$s'  , '%3$s' )
+
+
+</div>
+
+<div class="get-job-for-share">
+
+-- select
+-- '%1$s' @userId
+
+-- select @userId := 1;
+
+select * 
+from linkuhcl_job j
+join linkuhcl_jobShare js on j.jobId = js.jobId
+where 
+	js.userId in
+	(
+		select connectUserSender from linkuhcl_connectUser
+		where connectUserSender = '%1$s' 
+			or connectUserReceiver = '%1$s'
+		union
+		select connectUserReceiver from linkuhcl_connectUser
+		where connectUserSender = '%1$s' 
+			or connectUserReceiver = '%1$s'
+	)
+	and js.userId != '%1$s'
+order by j.jobCreatedTime 
+
+</div>
+
+<div class="feed-find-user">
+
+-- '%1$s' @part
+select * from linkuhcl_userInfo 
+where userId like '%%%1$s%%' or userInfoFirstName like '%%%1$s%%'
+or userInfoLastName like '%%%1$s%%' or userInfoInfo like '%%%1$s%%'
+
+
+</div>
+
+<div class="feed-find-user-for-friend-request">
+
+-- '%1$s' @part
+-- '%2$s' @userId
+
+select * from linkuhcl_userInfo u
+where 
+	(
+		userId like '%%%1$s%%' or userInfoFirstName like '%%%1$s%%'
+		or userInfoLastName like '%%%1$s%%' or userInfoInfo like '%%%1$s%%'
+	)
+	and userId != '%2$s'
+	and not exists
+	(
+		select * from linkuhcl_connectUser
+		where 
+			(
+				connectUserSender = u.userId  
+				and connectUserReceiver = '%2$s'
+			)
+			or 
+			(
+				connectUserSender = '%2$s'
+				and connectUserReceiver = u.userId  
+			)
+	)
+
+
+</div>
+
+<div class="get-job-user-shared">
+
+-- select
+-- '%1$s' @userId
+
+-- select @userId := 1;
+
+select * 
+from linkuhcl_job j
+join linkuhcl_jobShare js on j.jobId = js.jobId
+where js.userId = '%1$s'
+order by j.jobCreatedTime 
+
+</div>
+
+<div class="get-recent-job">
+
+-- select
+-- '%1$s' @userId
+
+-- select @userId := 1;
+
+select * 
+from linkuhcl_job j
+join linkuhcl_jobShare js on j.jobId = js.jobId
+where 
+	js.userId in
+	(
+		select connectUserSender from linkuhcl_connectUser
+		where connectUserSender = '%1$s' 
+			or connectUserReceiver = '%1$s'
+		union
+		select connectUserReceiver from linkuhcl_connectUser
+		where connectUserSender = '%1$s' 
+			or connectUserReceiver = '%1$s'
+	)
+order by j.jobCreatedTime 
+limit 5
+
+</div>
+
+<div class="get-connected-user"> 
+
+-- select
+-- '%1$s' @userId
+
+select * 
+from linkuhcl_connectUser c 
+join linkuhcl_user u on u.userId = c.connectUserSender
+or u.userId = c.connectUserReceiver
+join linkuhcl_userInfo i on u.userId = i.userId
+where c.connectUserSender = '%1$s' 
+	or c.connectUserReceiver = '%1$s'
+	and u.userId != '%1$s'
+
+
+	
+</div>
+	
+<div class="get-user-info"> 
+
+-- '%1$s' @userId
+select * from linkuhcl_userInfo where userId = '%1$s'
+	
+</div>
+
+<div class="get-friend-request"> 
+
+
+-- select
+-- '%1$s' @userId
+
+select * 
+from linkuhcl_connectUser c 
+join linkuhcl_user u on u.userId = c.connectUserSender
+join linkuhcl_userInfo i on u.userId = i.userId
+where c.connectUserReceiver = '%1$s' and c.connectUserApproved = false
+
+
+	
+</div>
+	
+<div class="feed-accept-friend-request"> 
+
+-- update
+-- '%1$s' @connectUserId
+
+update linkuhcl_connectUser c set c.connectUserApproved = true
+where c.connectUserId = '%1$s'
+	
+</div>	
+	
+<div class="screen-intro"> 
+1/ login
+2/ register
+3/ end
+</div>
+		
+<div class="screen-register-id-violation"> 
+
+Id must be between between 3 and 10 in length.
+Id must contain at least 1 number, 1 character and 1 special character.
+	
+</div>
+	
+<div class="screen-dashboard-setting"> 
+
+
+1/ See Connected People and select a people 
+	to see her/his profile and connected People
+2/ Send a request to create a connection with someone. 
+	And wait for approval 
+3/ Share a job ad 
+	to connected people
+4/ Post a job 
+	(for recruiter only)
+5/ Notification
+	for connection prompts and take action.
+6/ Toggle Role 
+	between Recruiter and Regular
+</div>
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

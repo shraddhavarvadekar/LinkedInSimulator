@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+
+
+
+
+        </ui:define>
+
+        <ui:define name="body" >
+
+            <style>
+
+
+                h1{
+                    margin:1em;
+                }
+                body{
+                    display:block;
+                }
+
+                .block{
+                    background: transparent;
+                    max-width: 100%;
+                    box-shadow: none;
+                }
+                h2{
+                    font-size:.8em;
+
+                }
+                form
+                {
+
+                    align-items: baseline;
+
+                }
+            </style>
+
+            <h:form>
+
+
+                <div class="block">
+
+
+                    
+                    <h2 class="text" ng-show="#{account.getFriendRequest().size()}== 0 ">You have no Friend Request </h2>
+
+                    <ui:repeat value="#{account.getFriendRequest()}" var="x">
+                        <div class="card  animated zoomInDown">
+                            <div class="card-block">
+                                    <h4 class="card-title" onclick="">
+                                        <h:commandLink value="#{ x.sname }" action="#{ account.viewprofile(  x.sid , 'show_profile_details'   ) }"   >
+                                        </h:commandLink>
+                                    </h4>
+                                    <p class="card-text"></p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Wish to connect with you.
+                                </li>
+                            </ul>
+                            <div class="card-block">
+
+
+                                <h:commandLink styleClass="card-link " action="#{ account.AcceptRequest( x.sid , 'Accepted' ) }">Accept</h:commandLink>
+
+                                <h:commandLink styleClass="card-link "   action="#{ account.AcceptRequest( x.sid , 'Deny' ) }">Deny</h:commandLink>
+
+
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+
+
+
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+

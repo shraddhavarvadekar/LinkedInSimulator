@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+
+            <title>Compose Message</title>
+
+
+        </ui:define>
+
+        <ui:define name="body" >
+
+
+            <h:form>
+                
+                <div class="block">
+
+                    <p>Message From
+                        <h:inputText id="u1" 
+                                     required="true" 
+                                     
+                                     styleClass="form-control"
+                                     requiredMessage="Please enter User 1" 
+                                     value="#{account.accountid}"/>
+
+                    </p>
+
+                    <p>Message To 
+                        <h:inputText id="u2" 
+                                     styleClass="form-control"
+                                     required="true" 
+                                     requiredMessage="Please Enter User 2" 
+                                     value="#{account.profile.id}"/>
+                    </p>
+
+                    <p>
+                        <h:inputTextarea id="chatMessage"
+                                     styleClass="form-control" 
+                                         label="Please type your message here" 
+                                         value="#{account.message}"
+                                         style="width: 600px;height: 200px;"></h:inputTextarea>
+                    </p> 
+
+                    <h:commandButton class="btn btn-info-outline"  id="chatButton" value="Send Message" action="#{account.chatMessage(account.accountid, account.profile.id,account.message)}"></h:commandButton>
+
+                </div>
+            </h:form>
+                
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+
+
+
+

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+            
+            <title>Home</title>
+            <meta http-equiv="pragma" content="no-cache" />
+
+            
+        </ui:define>
+
+        <ui:define name="body" >
+            
+            <style>
+
+                body{
+                    display: block;
+                }
+                html,body,form,.container{
+                    height:100%;
+                }
+                .btn{                    
+
+                    display:block;
+                    margin:1em;
+                }
+                
+                .block{     
+
+                    margin-top:10%;
+                    max-width:100%;
+                }
+                
+                .block:hover{
+                    opacity:1;
+                }
+                h2{
+                    margin:.5em 0;
+                    color:white;
+                }
+            </style>
+
+            <h:form>
+
+           
+            <div class="container" video-bg="" start="0" end="8" video-id="'9rYkTfJiTqc'">
+
+                
+                    <div class="block animated zoomInDown"  
+                         onmouseleave="
+                         $(this).removeClass('zoomInDown');
+                         $(this).removeClass('jello');
+                         var e = $(this);
+                         setTimeout( function(){ e.addClass('jello'); }, 10 );
+                         "
+                    >
+
+                    <h2 class="text-primary" >
+                        Welcome
+                        <h:commandLink
+                                          action="#{account.viewprofile( account.accountid , 'show_profile_details' )}"
+                                          > #{account.name}</h:commandLink>
+
+                    </h2>
+
+                        <a class="btn btn-primary" href="seeconnection.xhtml">View Connections</a>
+
+
+                        <a class="btn btn-primary" ng-show=" '#{account.type}' == 'recruiter' " href="addJob.xhtml">Add Jobs</a>
+
+
+                        <a class="btn btn-primary" href="jobs.xhtml">View Shared Jobs</a>
+
+
+
+
+
+                        <a class="btn btn-primary" href="recommendation.xhtml">View Recommendation</a>
+
+
+                        <a class="btn btn-primary" href="acceptrequest.xhtml">Accept Request</a>
+
+
+                        <a class="btn btn-primary" href="notification.xhtml">Notification</a>
+
+
+
+                        <a class="btn btn-primary" href="index.xhtml">Sign Out</a>
+
+                    </div>
+
+
+
+
+                </div>
+                
+            </h:form>
+            
+        </ui:define>
+        
+    </ui:composition>
+</html>
+

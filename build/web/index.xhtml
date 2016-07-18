@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+
+            <title>Compose Message</title>
+
+
+        </ui:define>
+
+        <ui:define name="body" >
+
+            <style>
+
+                body{
+                    display: block;
+                }
+                html,body,form,.container{
+                    height:100%;
+                }
+                form{
+                    padding-top:20%;
+                    background:transparent;
+                }
+                input.form-control{
+                    margin:0;
+                }
+
+                .block{
+                    width:20em;
+                }
+            </style>
+
+            <div class="container" video-bg="" start="9" end="48" video-id="'qa03I7AUVqE'">
+
+
+
+                <h:form>
+
+
+                    <center>
+                        <div class="block animated rubberBand">
+                            <label class="text text-primary">
+                                Please enter your  ID:
+                            </label>
+                            <h:inputText id="id" required ="true" 
+                                         class="form-control"
+                                         requiredMessage="The ID field cannot be empty"
+                                         title="Please enter your ID"
+                                         value="#{account.accountid}"
+                                         validatorMessage="The ID must be between 3 and 20 characters">
+                                <f:validateLength maximum="20" minimum="3" />
+                            </h:inputText>
+
+
+                            <label class="text text-primary">
+                                Please enter your password:
+                            </label>
+                            <h:inputText id="password" required ="true" 
+                                         class="form-control"
+                                         requiredMessage="The password field cannot be empty"
+                                         title="Please enter your psw"
+                                         value="#{account.password}"/>
+
+                            <h:commandButton 
+                                class="btn btn-primary" id="submit" value="Submit"
+                                action="#{account.login}"  />
+
+                            <br/>
+                            
+                            <a class="btn btn-info-outline"  href="faces/forgotpwd.xhtml">Forgot Password</a>
+                            <a class="btn btn-info-outline"  href="faces/register.xhtml">Register</a>
+                           
+                            
+                        </div>
+                    </center>
+                </h:form>
+
+            </div>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+
+
+
+

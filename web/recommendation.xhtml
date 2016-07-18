@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+        
+    <ui:composition template="MasterPage.xhtml">
+        <ui:define name="head">
+            
+            <title>Recommendation</title>
+            <meta http-equiv="pragma" content="no-cache" />
+
+            
+        </ui:define>
+
+        <ui:define name="body" >
+            
+            <style>
+            h1{
+                    margin:1em;
+                }
+                body{
+                    display:block;
+                }
+                
+                .block{
+                    background: transparent;
+                    max-width: 100%;
+                    box-shadow: none;
+                }
+                h2{
+                    font-size:.8em;
+                    
+                }
+                form
+                {
+                    
+                    align-items: baseline;
+
+                }
+            </style>
+
+            <h:form>
+
+                <div class="block">
+
+
+
+                        <h2 class="text">People you may like in #{account.company}</h2>
+                        
+                        <ui:repeat value="#{ account.get1stRecommendation() }" var="item" >
+                            
+                            <div class="card  animated zoomInDown">
+                                <!--
+                                <img class="card-img-top" data-src="..." alt="Card image cap"/>
+                                -->
+                                <div class="card-block">
+                                        <h4 class="card-title" onclick="">
+                                            <h:commandLink value="#{ item.get('name') }" action="#{ account.viewprofile(  item.get('id') , 'show_profile_details'   ) }"   >
+                                            </h:commandLink>
+                                        </h4>
+                                        <p class="card-text"></p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">#{ item.get('company')}</li>
+                                        <li class="list-group-item">#{ item.get('type')}</li>
+                                </ul>
+                                <div class="card-block">
+                                      
+                                         <h:commandLink
+                                              action="#{account.SendRequest(item.get('id'))}"
+                                              >Send Request</h:commandLink>
+                                </div>
+                            </div>
+
+                        </ui:repeat>
+
+                        
+                        <h2 class="text">Others you may like to get in touch</h2>
+
+                        <ui:repeat value="#{ account.get2ndRecommendation() }" var="item" >
+                            
+                            <div class="card  animated zoomInDown">
+                                <!--
+                                <img class="card-img-top" data-src="..." alt="Card image cap"/>
+                                -->
+                                <div class="card-block">
+
+                                    <h4 class="card-title" onclick="">
+                                            <h:commandLink action="#{account.viewprofile( item.get('id') , 'show_profile_details' )}"   >#{ item.get("name") }</h:commandLink>
+                                    </h4>
+                                    <p class="card-text"></p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">#{ item.get('company')}</li>
+                                        <li class="list-group-item">#{ item.get('type')}</li>
+                                </ul>
+                                <div class="card-block">
+                                    
+                                         <h:commandLink
+                                              action="#{account.SendRequest(item.get('id'))}"
+                                              >Send Request</h:commandLink>
+                                </div>
+                            </div>
+
+                        </ui:repeat>
+                        
+
+
+
+                </div>
+                
+            </h:form>
+            
+        </ui:define>
+        
+    </ui:composition>
+        
+</html>
